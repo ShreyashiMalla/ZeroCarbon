@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Electricity Usage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #10B981;
+    --primary-dark: #059669;
+    --secondary: #3B82F6;
+    --dark: #111827;
+    --light: #F9FAFB;
+    --card-bg: #FFFFFF;
+    --surface: #F3F4F6;
+    --text: #374151;
+    --text-light: #6B7280;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --success: #10B981;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --radius: 12px;
+    --radius-lg: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    font-family: 'Inter', sans-serif;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Modern Glassmorphism Container */
+.form-card {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+/* Header Section */
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.header-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.header-text h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.header-text p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 6px;
+}
+
+/* Info Box */
+.info-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid var(--primary);
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.info-header i {
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.info-header h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+}
+
+.info-content {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+}
+
+.info-content ul {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.info-content li {
+    margin-bottom: 6px;
+}
+
+/* Form Styling */
+form p {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+}
+
+.form-control {
+    position: relative;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    color: white;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    transition: var(--transition);
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+form input::placeholder,
+form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-hint {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 6px;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(16, 185, 129, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Back Link */
+.back-link {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.back-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 15px;
+    transition: var(--transition);
+}
+
+.back-link a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .form-card {
+        padding: 30px 20px;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .header-text h2 {
+        font-size: 24px;
+    }
+    
+    form input,
+    form select,
+    form textarea {
+        padding: 14px 16px;
+    }
+    
+    .submit-btn {
+        padding: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="form-card">
+
+    <!-- Header -->
+    <div class="form-header">
+        <div class="header-content">
+            <div class="header-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="header-text">
+                <h2>Electricity Usage</h2>
+                <p>Track your electricity consumption and its carbon impact</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Information Box -->
+    <div class="info-box">
+        <div class="info-header">
+            <i class="fas fa-info-circle"></i>
+            <h4>How to fill this form</h4>
+        </div>
+        <div class="info-content">
+            <ul>
+                <li>Enter electricity consumed in <strong>kilowatt-hours (kWh)</strong></li>
+                <li>Refer to your electricity bill for accurate data</li>
+                <li><strong>Example:</strong> 120 kWh for a typical household</li>
+                <li>1 kWh ≈ 0.92 kg CO₂ (global average)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-content">
+            {% for field in form %}
+            <p>
+                <label for="{{ field.id_for_label }}">
+                    {% if field.label %}{{ field.label }}{% endif %}
+                </label>
+                <div class="form-control">
+                    {{ field }}
+                    {% if field.help_text %}
+                    <div class="form-hint">{{ field.help_text }}</div>
+                    {% endif %}
+                </div>
+                {% if field.errors %}
+                <div class="form-errors">
+                    {% for error in field.errors %}
+                    <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </p>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="submit-btn">
+            <i class="fas fa-calculator"></i>
+            Calculate Carbon Impact
+        </button>
+    </form>
+
+    <!-- Back Link -->
+    <div class="back-link">
+        <a href="/dashboard/">
+            <i class="fas fa-arrow-left"></i>
+            Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
