@@ -25,19 +25,6 @@
 > ⚠️ **Note:** The AI/ML module (YOLOv8 model) is currently maintained as a separate component and has not yet been integrated into this repository. Integration is planned as part of future development.
 
 ---
-
-## 👥 Authors
-
-| Name | Roll No. | Institution |
-|---|---|---|
-| Shreyashi Malla | 2330049 | KIIT (Deemed to be University) |
-| Kaushiki Singh | 2330092 | KIIT (Deemed to be University) |
-| Aryan | 2330146 | KIIT (Deemed to be University) |
-
-> 🎓 School of Electronics Engineering, KIIT, Bhubaneswar, India
-
----
-
 ## ✨ Key Features
 
 - 🔐 **Stateless JWT Authentication** — RFC 7519-compliant, edge-enforced via Spring Cloud API Gateway
@@ -317,14 +304,7 @@ Upon waste detection, each classified item is queried against a custom `WASTE_DA
 
 ---
 
-## 🙏 Acknowledgements
 
-Sincere gratitude to:
-- **Prof. Abhik Gorai** — for guidance throughout this project
-- **Dr. Sarita Nanda** — School of Electronics Engineering, KIIT
-- **Dr. Suprava Patnaik** — School of Electronics Engineering, KIIT
-
----
 
 ## 📄 License
 
